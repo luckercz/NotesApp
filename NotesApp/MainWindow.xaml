@@ -8,14 +8,14 @@
         Title="Poznámky" Height="600" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="4*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
             
         </Grid.ColumnDefinitions>
         
@@ -44,5 +44,21 @@
         <Button Grid.Column="6" Grid.Row="1">
             <Image Source="/png/close2.png"/>
         </Button>
+
+        <TextBox Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="3" BorderBrush="Black" BorderThickness="2" Background="#e7dddd" Text="Hledat" FontSize="25" VerticalContentAlignment="Center"/>
+        <Image Source="/png/searchIcon.png" Grid.Column="6" Grid.Row="3"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="5">
+            <StackPanel x:Name="stackPanel">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        
+                    </Grid.RowDefinitions>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

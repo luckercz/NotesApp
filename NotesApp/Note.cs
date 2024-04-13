@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace NotesApp
 {
-    internal class Note
+    public class Note
     {
+        public string Title { get; set; }
+        public string NoteContent { get; set; }
+        public List<string> Label { get; set; }
+
+        public Note(string title, string noteContent, List<string> label)
+        {
+            Title = title;
+            NoteContent = noteContent;
+            Label = label;
+        }
     }
 }
