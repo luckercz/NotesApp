@@ -45,7 +45,7 @@
             <Image Source="/png/close2.png"/>
         </Button>
 
-        <TextBox Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="3" BorderBrush="Black" BorderThickness="2" Background="#e7dddd" Text="Hledat" FontSize="25" VerticalContentAlignment="Center" Padding="2 0"/>
+        <TextBox x:Name="SearchBox" Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="3" BorderBrush="Black" BorderThickness="2" Background="#e7dddd" Text="Hledat" FontSize="25" VerticalContentAlignment="Center" Padding="2 0" GotFocus="RemoveTextOnFirstFocus" TextChanged="SearchChange"/>
         <Image Source="/png/searchIcon.png" Grid.Column="6" Grid.Row="3"/>
 
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="5">

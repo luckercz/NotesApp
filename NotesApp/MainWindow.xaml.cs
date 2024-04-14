@@ -44,7 +44,7 @@ namespace NotesApp
         }
         private void SelectImportNotes(object sender, RoutedEventArgs e)
         {
-            var dialog = new Microsoft.Win32.OpenFileDialog();
+            OpenFileDialog dialog = new OpenFileDialog();
             dialog.FileName = "Document";
             dialog.DefaultExt = ".json";
             dialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
@@ -102,6 +102,25 @@ namespace NotesApp
                 string path = saveFileDialog.FileName;
                 File.WriteAllText(path, jsonNotes);
             }
+        }
+        private void SearchChange(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchBox.Text.ToLower();
+            Search(searchText);
+        }
+        private void Search(string text)
+        {
+            if (text == "hledat")
+            {
+                return;
+            }
+            List<Note> searchResult = Notes.Where(item =>
+                item.Title.ToLower().Contains(text) ||
+                item.Label.ToLower().Contains(text)
+            ).ToList();
+            AllNotes allSearchNotes = new AllNotes();
+            allSearchNotes.Notes = searchResult;
+            InitializeNotes(allSearchNotes);
         }
         public void InitializeWindow()
         {
@@ -180,6 +199,11 @@ namespace NotesApp
             //grid.ShowGridLines = true;
 
             stackPanel.Children.Add(grid);
+        }
+        private void RemoveTextOnFirstFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).Text = string.Empty;
+            ((TextBox)sender).GotFocus -= RemoveTextOnFirstFocus;
         }
     }
 }
