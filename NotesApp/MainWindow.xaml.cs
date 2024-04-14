@@ -143,6 +143,8 @@ namespace NotesApp
             scaleTransform.ScaleX = 1.8;
             scaleTransform.ScaleY = 1.8;
             checkBox1.LayoutTransform = scaleTransform;
+            margin.Top = 5;
+            checkBox1.Margin = margin;
 
             checkBox1.SetBinding(CheckBox.IsCheckedProperty, new Binding("IsChecked"));
 
