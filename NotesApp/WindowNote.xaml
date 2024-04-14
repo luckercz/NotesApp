@@ -39,8 +39,8 @@
             <Image Source="/png/close2.png" />
         </Button>
 
-        <TextBox x:Name="Title" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3" Text="Jméno" FontSize="15" VerticalContentAlignment="Center" BorderThickness="2" BorderBrush="Black" Padding="2 0"/>
-        <TextBox x:Name="Label" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="5" Text="Štítek" FontSize="15" VerticalContentAlignment="Center" BorderThickness="2" BorderBrush="Black" Padding="2 0"/>
-        <TextBox x:Name="Content" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7" Text="Obsah" FontSize="15" BorderThickness="2" BorderBrush="Black" Background="LightGray" Padding="2 0"/>
+        <TextBox x:Name="Title" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3" Text="Jméno" FontSize="15" VerticalContentAlignment="Center" BorderThickness="2" BorderBrush="Black" Padding="2 0" GotFocus="RemoveTextOnFirstFocus"/>
+        <TextBox x:Name="Label" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="5" Text="Štítek" FontSize="15" VerticalContentAlignment="Center" BorderThickness="2" BorderBrush="Black" Padding="2 0" GotFocus="RemoveTextOnFirstFocus"/>
+        <TextBox x:Name="Content" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7" Text="Obsah" FontSize="15" BorderThickness="2" BorderBrush="Black" Background="LightGray" Padding="2 0" GotFocus="RemoveTextOnFirstFocus"/>
     </Grid>
 </Window>

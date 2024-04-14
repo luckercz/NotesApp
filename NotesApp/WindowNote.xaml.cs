@@ -83,5 +83,10 @@ namespace NotesApp
         {
             Close();
         }
+        private void RemoveTextOnFirstFocus(object sender, RoutedEventArgs e)
+        {
+            ((TextBox)sender).Text = string.Empty;
+            ((TextBox)sender).GotFocus -= RemoveTextOnFirstFocus;
+        }
     }
 }
