@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,15 @@ namespace NotesApp
 {
     public class AllNotes
     {
-        public List<Note> Notes {  get; set; }
-
+        public List<Note> Notes { get; set; }
+        public AllNotes()
+        {
+            Notes = new List<Note>();
+        }
+        public AllNotes(string json)
+        {
+            Notes = JsonConvert.DeserializeObject<AllNotes>(json).Notes;
+        }
         public void AddNote(Note note)
         {
             Notes.Add(note);

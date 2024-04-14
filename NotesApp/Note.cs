@@ -9,10 +9,10 @@ namespace NotesApp
     public class Note
     {
         public string Title { get; set; }
-        public string NoteContent { get; set; }
         public string Label { get; set; }
+        public string NoteContent { get; set; }
 
-        public Note(string title, string noteContent, string label)
+        public Note(string title, string label, string noteContent)
         {
             Title = title;
             NoteContent = noteContent;

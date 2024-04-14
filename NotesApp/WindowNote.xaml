@@ -35,7 +35,7 @@
         <Button Grid.Column="3" Grid.Row="1" Click="PinNote">
             <Image x:Name="PinImage" Source="/png/pin.png" />
         </Button>
-        <Button Grid.Column="4" Grid.Row="1">
+        <Button Grid.Column="4" Grid.Row="1" Click="CloseNote">
             <Image Source="/png/close2.png" />
         </Button>
 
