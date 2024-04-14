@@ -24,5 +24,11 @@ namespace NotesApp
         {
             InitializeComponent();
         }
+
+        private void NewNote(object sender, RoutedEventArgs e)
+        {
+            WindowNote window2 = new WindowNote();
+            window2.Show();
+        }
     }
 }
