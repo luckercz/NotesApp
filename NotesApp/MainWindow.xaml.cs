@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -36,6 +37,31 @@ namespace NotesApp
         private void CloseNote(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+        private void SelectImportNotes(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.FileName = "Document";
+            dialog.DefaultExt = ".json";
+            dialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                string path = dialog.FileName;
+                string json = File.ReadAllText(path);
+                AllNotes allNotes = new AllNotes(json);
+                ImportNotes(allNotes);
+            }
+        }
+        private void ImportNotes(AllNotes allNotes)
+        {
+            string json = File.ReadAllText("AllNotes.json");
+            AllNotes currentNotes = new AllNotes(json);
+            currentNotes.AddNotes(allNotes.Notes);
+            File.WriteAllText("AllNotes.json", JsonConvert.SerializeObject(currentNotes));
+            InitializeNotes();
         }
         public void InitializeNotes()
         {

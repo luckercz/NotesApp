@@ -22,5 +22,12 @@ namespace NotesApp
         {
             Notes.Add(note);
         }
+        public void AddNotes(List<Note> notes)
+        {
+            foreach (Note note in notes)
+            {
+                AddNote(note);
+            }
+        }
     }
 }
