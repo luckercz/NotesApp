@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -77,6 +78,30 @@ namespace NotesApp
             allNotes.Notes = Notes.ToList();
             File.WriteAllText("AllNotes.json", JsonConvert.SerializeObject(allNotes));
             InitializeWindow();
+        }
+        private void ExportCheckedNotes(object sender, RoutedEventArgs e)
+        {
+            if (!Notes.Any(i => i.IsChecked))
+            {
+                return;
+            }
+            AllNotes notesToExport= new AllNotes();
+            notesToExport.AddNotes(Notes.Where(i => i.IsChecked).ToList());
+            string jsonNotes = JsonConvert.SerializeObject(notesToExport);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.FileName = "Document";
+            saveFileDialog.DefaultExt = ".json";
+            saveFileDialog.Filter = "Json files (*.json)|*.json|Text files (*.txt)|*.txt";
+
+            bool? result = saveFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string path = saveFileDialog.FileName;
+                File.WriteAllText(path, jsonNotes);
+            }
         }
         public void InitializeWindow()
         {
