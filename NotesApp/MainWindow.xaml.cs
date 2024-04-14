@@ -70,8 +70,13 @@ namespace NotesApp
         {
             foreach (var item in Notes.Where(i => i.IsChecked).ToList())
             {
+                Notes.Remove(item);
                 Debug.WriteLine(item.Title);
             }
+            AllNotes allNotes = new AllNotes();
+            allNotes.Notes = Notes.ToList();
+            File.WriteAllText("AllNotes.json", JsonConvert.SerializeObject(allNotes));
+            InitializeWindow();
         }
         public void InitializeWindow()
         {
@@ -145,7 +150,7 @@ namespace NotesApp
             grid.Children.Add(textBlock2);
             grid.Children.Add(checkBox1);
 
-            grid.ShowGridLines = true;
+            //grid.ShowGridLines = true;
 
             stackPanel.Children.Add(grid);
         }
