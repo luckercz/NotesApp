@@ -41,7 +41,7 @@
         <Button Grid.Column="5" Grid.Row="1">
             <Image Source="/png/export3.png"/>
         </Button>
-        <Button Grid.Column="6" Grid.Row="1">
+        <Button Grid.Column="6" Grid.Row="1" Click="CloseNote">
             <Image Source="/png/close2.png"/>
         </Button>
 
@@ -50,13 +50,24 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled" Grid.Column="1" Grid.ColumnSpan="6" Grid.Row="5">
             <StackPanel x:Name="stackPanel">
-                <Grid>
+                <Grid MinHeight="100px" Background="#dbddda" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
-                        
+                        <ColumnDefinition Width="8*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        
+                        <RowDefinition Height="30px"></RowDefinition>
+                        <RowDefinition MinHeight="50px"></RowDefinition>
                     </Grid.RowDefinitions>
+                    
+                    <TextBlock Text="Jmeno" Grid.Column="0" Grid.Row="0" FontSize="23"></TextBlock>
+                    <TextBlock Text="content" Grid.Column="0" Grid.Row="1" FontSize="20"></TextBlock>
+                    <CheckBox Grid.Column="1" Height="28">
+                        <CheckBox.LayoutTransform>
+                            <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
+                        </CheckBox.LayoutTransform>
+                    </CheckBox>
                 </Grid>
             </StackPanel>
         </ScrollViewer>

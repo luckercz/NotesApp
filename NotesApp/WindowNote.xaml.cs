@@ -22,9 +22,11 @@ namespace NotesApp
     public partial class WindowNote : Window
     {
         bool pinned = false;
-        public WindowNote()
+        MainWindow mainWindow;
+        public WindowNote(MainWindow mainWindow)
         {
             InitializeComponent();
+            this.mainWindow = mainWindow;
         }
         private void SaveNote(object sender, RoutedEventArgs e)
         {
@@ -62,6 +64,7 @@ namespace NotesApp
 
             string allNotesJson = JsonConvert.SerializeObject(allNotes);
             File.WriteAllText("AllNotes.json", allNotesJson);
+            mainWindow.InitializeNotes();
             Close();
         }
         private void PinNote(object sender, RoutedEventArgs e)
