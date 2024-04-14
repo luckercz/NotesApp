@@ -11,6 +11,7 @@ namespace NotesApp
         public string Title { get; set; }
         public string Label { get; set; }
         public string NoteContent { get; set; }
+        public bool IsChecked { get; set; }
 
         public Note(string title, string label, string noteContent)
         {

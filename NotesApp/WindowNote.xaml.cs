@@ -64,7 +64,7 @@ namespace NotesApp
 
             string allNotesJson = JsonConvert.SerializeObject(allNotes);
             File.WriteAllText("AllNotes.json", allNotesJson);
-            mainWindow.InitializeNotes();
+            mainWindow.InitializeWindow();
             Close();
         }
         private void PinNote(object sender, RoutedEventArgs e)

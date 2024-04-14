@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -23,10 +24,12 @@ namespace NotesApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Note> Notes {  get; private set; }
         public MainWindow()
         {
             InitializeComponent();
-            InitializeNotes();
+            DataContext = this;
+            InitializeWindow();
         }
 
         private void NewNote(object sender, RoutedEventArgs e)
@@ -61,13 +64,29 @@ namespace NotesApp
             AllNotes currentNotes = new AllNotes(json);
             currentNotes.AddNotes(allNotes.Notes);
             File.WriteAllText("AllNotes.json", JsonConvert.SerializeObject(currentNotes));
-            InitializeNotes();
+            InitializeWindow();
         }
-        public void InitializeNotes()
+        private void DeleteCheckedNotes(object sender, RoutedEventArgs e)
         {
-            stackPanel.Children.Clear();
+            foreach (var item in Notes.Where(i => i.IsChecked).ToList())
+            {
+                Debug.WriteLine(item.Title);
+            }
+        }
+        public void InitializeWindow()
+        {
             string json = File.ReadAllText("AllNotes.json");
             AllNotes allNotes = new AllNotes(json);
+            UpdateObservableCollection(allNotes);
+            InitializeNotes(allNotes);
+        }
+        private void UpdateObservableCollection(AllNotes allNotes)
+        {
+            Notes = new ObservableCollection<Note>(allNotes.Notes);
+        }
+        private void InitializeNotes(AllNotes allNotes)
+        {
+            stackPanel.Children.Clear();
             foreach (Note note in allNotes.Notes)
             {
                 AddNoteToStackPanel(note);
@@ -81,6 +100,8 @@ namespace NotesApp
             Thickness margin = grid.Margin;
             margin.Top = 10;
             grid.Margin = margin;
+
+            grid.DataContext = note;
 
             ColumnDefinition colDef1 = new ColumnDefinition();
             colDef1.Width = new GridLength(8, GridUnitType.Star);   
@@ -117,6 +138,8 @@ namespace NotesApp
             scaleTransform.ScaleX = 1.8;
             scaleTransform.ScaleY = 1.8;
             checkBox1.LayoutTransform = scaleTransform;
+
+            checkBox1.SetBinding(CheckBox.IsCheckedProperty, new Binding("IsChecked"));
 
             grid.Children.Add(textBlock1);
             grid.Children.Add(textBlock2);
