@@ -28,6 +28,14 @@ namespace NotesApp
             InitializeComponent();
             this.mainWindow = mainWindow;
         }
+        public WindowNote(MainWindow mainWindow, Note note)
+        {
+            InitializeComponent();
+            this.mainWindow = mainWindow;
+            Title.Text = note.Title;
+            Label.Text = note.Label;
+            Content.Text = note.NoteContent;
+        }
         private void SaveNote(object sender, RoutedEventArgs e)
         {
             string title = Title.Text;

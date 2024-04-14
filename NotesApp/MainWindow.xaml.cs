@@ -72,7 +72,7 @@ namespace NotesApp
             foreach (var item in Notes.Where(i => i.IsChecked).ToList())
             {
                 Notes.Remove(item);
-                Debug.WriteLine(item.Title);
+                //Debug.WriteLine(item.Title);
             }
             AllNotes allNotes = new AllNotes();
             allNotes.Notes = Notes.ToList();
@@ -122,12 +122,24 @@ namespace NotesApp
             allSearchNotes.Notes = searchResult;
             InitializeNotes(allSearchNotes);
         }
+        private void OpenNote(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
+            {
+                Debug.WriteLine("doubleClick");
+                Grid grid = sender as Grid;
+                Note note = grid.DataContext as Note;
+                WindowNote windowNote = new WindowNote(this, note);
+                windowNote.Show();
+            }
+        }
         public void InitializeWindow()
         {
             string json = File.ReadAllText("AllNotes.json");
             AllNotes allNotes = new AllNotes(json);
             UpdateObservableCollection(allNotes);
             InitializeNotes(allNotes);
+            Search(SearchBox.Text.ToLower());
         }
         private void UpdateObservableCollection(AllNotes allNotes)
         {
@@ -151,6 +163,8 @@ namespace NotesApp
             grid.Margin = margin;
 
             grid.DataContext = note;
+            grid.MouseDown += OpenNote;
+            grid.Cursor = Cursors.Hand;
 
             ColumnDefinition colDef1 = new ColumnDefinition();
             colDef1.Width = new GridLength(8, GridUnitType.Star);   
@@ -175,7 +189,7 @@ namespace NotesApp
 
             TextBlock textBlock2 = new TextBlock();
             textBlock2.Text = note.NoteContent;
-            Debug.WriteLine(note.NoteContent);
+            //Debug.WriteLine(note.NoteContent);
             textBlock2.FontSize = 20;
             Grid.SetColumn(textBlock2, 0);
             Grid.SetRow(textBlock2, 1);
