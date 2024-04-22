@@ -135,8 +135,17 @@ namespace NotesApp
         }
         public void InitializeWindow()
         {
-            string json = File.ReadAllText("AllNotes.json");
-            AllNotes allNotes = new AllNotes(json);
+            AllNotes allNotes;
+            if (!File.Exists("AllNotes.json"))
+            {
+                allNotes = new AllNotes();
+            }
+            else
+            {
+                string json = File.ReadAllText("AllNotes.json");
+                allNotes = new AllNotes(json);
+            }
+            
             UpdateObservableCollection(allNotes);
             InitializeNotes(allNotes);
             Search(SearchBox.Text.ToLower());
